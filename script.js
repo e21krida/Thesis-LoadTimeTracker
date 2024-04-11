@@ -34,19 +34,17 @@
     }
 
     function download() {
-        setTimeout(() => {
-            let results = GM_getValue('loadTimes', []);
-            const resultsJSON = JSON.stringify(results, null, 2);
-            const blob = new Blob([resultsJSON], { type: 'application/json' });
-            const downloadLink = document.createElement('a');
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = 'results.json';
-            downloadLink.textContent = 'Download Results';
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-            GM_setValue('loadTimes', []);
-        }, 5000);
+        let results = GM_getValue('loadTimes', []);
+        const resultsJSON = JSON.stringify(results, null, 2);
+        const blob = new Blob([resultsJSON], { type: 'application/json' });
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = 'results.json';
+        downloadLink.textContent = 'Download Results';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        GM_setValue('loadTimes', []);
     }
 
     function reload() {
