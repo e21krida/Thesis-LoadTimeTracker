@@ -15,23 +15,19 @@
 
     function measure() {
         'use strict';
-        console.log("Load time tracking script running");
         let startTime = performance.now();
         window.addEventListener("allModelsLoaded", () => {
-            console.log("Load time calculating");
             let endTime = performance.now();
             let loadTime = endTime - startTime;
-            console.log('Load Time: ' + loadTime + ' ms');
-            saveAndCheckLoadTime(loadTime);
+            save(loadTime);
         });
     }
 
-    function saveAndCheckLoadTime(loadTime) {
+    function save(loadTime) {
         let loadTimes = GM_getValue('loadTimes', []);
         loadTimes.push(loadTime);
         GM_setValue('loadTimes', loadTimes);
         if (loadTimes.length >= runs) {
-            console.log('All Load Times:', loadTimes);
             download();
         } else {
             reload();
