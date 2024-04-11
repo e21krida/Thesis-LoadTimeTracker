@@ -9,12 +9,11 @@
 // @run-at       document-body
 // ==/UserScript==
 
-(function() {
+(function () {
     const runs = 5;
     let url = "http://localhost:5173/";
 
     function measure() {
-        'use strict';
         let startTime = performance.now();
         window.addEventListener("allModelsLoaded", () => {
             let endTime = performance.now();
@@ -36,7 +35,7 @@
 
     function download() {
         setTimeout(() => {
-            let results = GM_getValue('loadTimes',[]);
+            let results = GM_getValue('loadTimes', []);
             const resultsJSON = JSON.stringify(results, null, 2);
             const blob = new Blob([resultsJSON], { type: 'application/json' });
             const downloadLink = document.createElement('a');
